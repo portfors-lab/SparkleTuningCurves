@@ -442,6 +442,8 @@ class MyForm(QtGui.QMainWindow):
         plt.xlabel('Frequency (kHz)')
         # plt.xlabel('Frequency (Hz)')
         plt.ylabel('Intensity (dB)')
+        plt.figtext(.02, .02, 'Threshold: ' + str(self.ui.doubleSpinBox_threshold.value()) + ' V')
+
 
         # Idea to try interpolation, didn't work as intended
         # plt.imshow(Z, aspect='equal', interpolation=None, origin='lower')
