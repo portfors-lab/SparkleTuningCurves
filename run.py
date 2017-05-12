@@ -391,7 +391,7 @@ class MyForm(QtGui.QMainWindow):
                     for r in range(reps):
                         trace = trace_data[t][r][target_chan]
 
-                        spike_times = 1000 * np.array(get_spike_times(trace, thresh, fs))
+                        spike_times = 1000 * np.array(get_spike_times(trace, thresh, fs, self.ui.view._abs))
                         spikes += len(spike_times)
 
                     spike_count[(stim_info[t]['components'][0]['frequency']/1000, stim_info[t]['components'][0]['intensity'])] = float(spikes)/float(reps)
@@ -443,7 +443,6 @@ class MyForm(QtGui.QMainWindow):
         # plt.xlabel('Frequency (Hz)')
         plt.ylabel('Intensity (dB)')
         plt.figtext(.02, .02, 'Threshold: ' + str(self.ui.doubleSpinBox_threshold.value()) + ' V')
-
 
         # Idea to try interpolation, didn't work as intended
         # plt.imshow(Z, aspect='equal', interpolation=None, origin='lower')

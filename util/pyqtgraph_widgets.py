@@ -2,6 +2,8 @@ import numpy as np
 import pyqtgraph as pg
 from copy import deepcopy
 
+from QtWrapper import QtCore, QtGui
+
 import spikestats
 from QtWrapper import QtCore
 from raster_bounds_dlg import RasterBoundsDialog
@@ -92,7 +94,7 @@ class TraceWidget(BasePlot):
     absUpdated = QtCore.Signal(bool, str)
     _polarity = 1
     _ampScalar = None
-    _abs = False
+    _abs = True
 
     def __init__(self, parent=None):
         super(TraceWidget, self).__init__(parent)
@@ -108,6 +110,18 @@ class TraceWidget(BasePlot):
         self.disableAutoRange()
 
         self.threshLine = pg.InfiniteLine(pos=0.5, angle=0, pen='r', movable=True)
+
+        invertAction = QtGui.QAction('Invert response polarity', None)
+        invertAction.setCheckable(True)
+        self.scene().contextMenu.append(invertAction) #should use function for this?
+        invertAction.triggered.connect(self.invertPolarity)
+
+        self.absAction = QtGui.QAction('Abs threshold', None)
+        self.absAction.setCheckable(True)
+        self.absAction.setChecked(self._abs)
+        self.scene().contextMenu.append(self.absAction)
+        self.absAction.triggered.connect(self.toggleAbs)
+
         self.addItem(self.threshLine)
         self.threshLine.sigPositionChangeFinished.connect(self.update_thresh)
         self.setLabel('left', '', units='V')
@@ -147,7 +161,7 @@ class TraceWidget(BasePlot):
         self.clearTraces()
         nreps = ys.shape[0]
         for irep in range(nreps):
-            self.trace_stash.append(self.plot(x, ys[irep, :], pen=(irep, nreps)))
+            self.trace_stash.append(self.plot(x, ys[irep, :] * self._polarity, pen=(irep, nreps)))
 
     def addTracesABR(self, x, ys, intensity, trace_num):
         self.clearTraces()
