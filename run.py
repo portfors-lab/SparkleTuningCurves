@@ -398,6 +398,23 @@ class MyForm(QtGui.QMainWindow):
                     # print 'spikes:', float(spikes)
                     # print 'avg_spikes:', float(spikes)/float(reps)
 
+        if len(trace_data.shape) == 3:
+            for t in range(traces):
+
+                if stim_info[t]['components'][0]['stim_type'] != 'silence':
+                    intensity.append(stim_info[t]['components'][0]['intensity'])
+                    frequency.append(stim_info[t]['components'][0]['frequency']/1000)
+
+                spikes = 0
+                for r in range(reps):
+                    trace = trace_data[t][r]
+
+                    spike_times = 1000 * np.array(get_spike_times(trace, thresh, fs, self.ui.view._abs))
+                    spikes += len(spike_times)
+
+                if stim_info[t]['components'][0]['stim_type'] != 'silence':
+                    spike_count[(stim_info[t]['components'][0]['frequency']/1000, stim_info[t]['components'][0]['intensity'])] = float(spikes)/float(reps)
+
         # Get only the unique values
         frequency = sorted(list(set(frequency)))
         intensity = sorted(list(set(intensity)))
