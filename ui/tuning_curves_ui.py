@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:/Users/Joel/Documents/SparkleTuningCurves/ui/tuning_curves.ui'
+# Form implementation generated from reading ui file 'tuning_curves.ui'
 #
 # Created by: PyQt4 UI code generator 4.11.4
 #
@@ -327,12 +327,21 @@ class Ui_Form_tuning_curves(object):
         self.groupBox_stimulus.setObjectName(_fromUtf8("groupBox_stimulus"))
         self.gridLayout_8 = QtGui.QGridLayout(self.groupBox_stimulus)
         self.gridLayout_8.setObjectName(_fromUtf8("gridLayout_8"))
+        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.label_stim_type = QtGui.QLabel(self.groupBox_stimulus)
         font = QtGui.QFont()
         font.setPointSize(8)
         self.label_stim_type.setFont(font)
         self.label_stim_type.setObjectName(_fromUtf8("label_stim_type"))
-        self.gridLayout_8.addWidget(self.label_stim_type, 0, 0, 1, 1)
+        self.horizontalLayout.addWidget(self.label_stim_type)
+        self.label_frequency = QtGui.QLabel(self.groupBox_stimulus)
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        self.label_frequency.setFont(font)
+        self.label_frequency.setObjectName(_fromUtf8("label_frequency"))
+        self.horizontalLayout.addWidget(self.label_frequency)
+        self.gridLayout_8.addLayout(self.horizontalLayout, 0, 0, 1, 1)
         self.gridLayout_3.addWidget(self.groupBox_stimulus, 0, 0, 2, 1)
         self.groupBox_log = QtGui.QGroupBox(self.centralwidget)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Ignored)
@@ -449,8 +458,9 @@ class Ui_Form_tuning_curves(object):
         self.groupBoxThreshold.setTitle(_translate("Form_tuning_curves", "Threshold ", None))
         self.doubleSpinBox_threshold.setSuffix(_translate("Form_tuning_curves", " V", None))
         self.pushButton_auto_threshold.setText(_translate("Form_tuning_curves", "Estimate Threshold", None))
-        self.groupBox_stimulus.setTitle(_translate("Form_tuning_curves", "Stimulus Type ", None))
+        self.groupBox_stimulus.setTitle(_translate("Form_tuning_curves", "Stimulus ", None))
         self.label_stim_type.setText(_translate("Form_tuning_curves", "None", None))
+        self.label_frequency.setText(_translate("Form_tuning_curves", "0 Hz", None))
         self.groupBox_log.setTitle(_translate("Form_tuning_curves", "Log ", None))
         self.groupBox_view.setTitle(_translate("Form_tuning_curves", "Trace View ", None))
         self.label.setText(_translate("Form_tuning_curves", "Open:", None))

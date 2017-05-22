@@ -229,6 +229,10 @@ class MyForm(QtGui.QMainWindow):
 
         stim_info = eval(h_file[target_seg][target_test].attrs['stim'])
         self.ui.label_stim_type.setText(stim_info[target_trace]['components'][0]['stim_type'])
+        if stim_info[target_trace]['components'][0]['stim_type'] == 'Pure Tone':
+            self.ui.label_frequency.setText(str(int(stim_info[target_trace]['components'][0]['frequency']/1000)) + ' kHz')
+        else:
+            self.ui.label_frequency.setText('')
 
         h_file.close()
 
