@@ -50,6 +50,8 @@ class MyForm(QtGui.QMainWindow):
 
         QtCore.QObject.connect(self.ui.pushButtonGenerate, QtCore.SIGNAL("clicked()"), self.generate_tuning_curve)
 
+        QtCore.QObject.connect(self.ui.groupBoxWindow, QtCore.SIGNAL("clicked()"), self.window_check)
+
     def browse(self):
         self.ui.comboBox_test_num.clear()
         self.ui.comboBox_channel.clear()
@@ -122,6 +124,28 @@ class MyForm(QtGui.QMainWindow):
             return False
 
         return True
+
+    def window_check(self):
+        if self.ui.groupBoxWindow.isChecked():
+            self.ui.label_xmax.setEnabled(True)
+            self.ui.label_xmin.setEnabled(True)
+            # self.ui.label_ymax.setEnabled(True)
+            # self.ui.label_ymin.setEnabled(True)
+
+            self.ui.doubleSpinBox_xmax.setEnabled(True)
+            self.ui.doubleSpinBox_xmin.setEnabled(True)
+            # self.ui.doubleSpinBox_ymax.setEnabled(True)
+            # self.ui.doubleSpinBox_ymin.setEnabled(True)
+        else:
+            self.ui.label_xmax.setEnabled(False)
+            self.ui.label_xmin.setEnabled(False)
+            # self.ui.label_ymax.setEnabled(False)
+            # self.ui.label_ymin.setEnabled(False)
+
+            self.ui.doubleSpinBox_xmax.setEnabled(False)
+            self.ui.doubleSpinBox_xmin.setEnabled(False)
+            # self.ui.doubleSpinBox_ymax.setEnabled(False)
+            # self.ui.doubleSpinBox_ymin.setEnabled(False)
 
     def load_traces(self):
         self.ui.comboBox_trace.clear()
@@ -393,7 +417,15 @@ class MyForm(QtGui.QMainWindow):
 
                     spikes = 0
                     for r in range(reps):
-                        trace = trace_data[t][r][target_chan]
+                        if self.ui.groupBoxWindow.isChecked():
+                            x_min = np.floor(self.ui.doubleSpinBox_xmin.value() * fs)
+                            x_max = np.floor(self.ui.doubleSpinBox_xmax.value() * fs)
+
+                            temp_trace = trace_data[t][r][target_chan]
+                            trace = temp_trace[x_min:x_max]
+                            pass
+                        else:
+                            trace = trace_data[t][r][target_chan]
 
                         spike_times = 1000 * np.array(get_spike_times(trace, thresh, fs, self.ui.view._abs))
                         spikes += len(spike_times)

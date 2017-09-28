@@ -179,7 +179,6 @@ class Ui_Form_tuning_curves(object):
         self.line_5.setObjectName(_fromUtf8("line_5"))
         self.gridLayout_12.addWidget(self.line_5, 0, 1, 1, 1)
         self.groupBoxWindow = QtGui.QGroupBox(self.centralwidget)
-        self.groupBoxWindow.setEnabled(False)
         font = QtGui.QFont()
         font.setPointSize(10)
         self.groupBoxWindow.setFont(font)
