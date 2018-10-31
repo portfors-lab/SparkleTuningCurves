@@ -35,6 +35,8 @@ class MyForm(QtGui.QMainWindow):
         self.backup_dir = ''
         self.basefname = ''
 
+        self.message_num = 0
+
         QtCore.QObject.connect(self.ui.pushButton_browse, QtCore.SIGNAL("clicked()"), self.browse)
         QtCore.QObject.connect(self.ui.comboBox_test_num, QtCore.SIGNAL("currentIndexChanged(const QString&)"), self.load_traces)
         QtCore.QObject.connect(self.ui.comboBox_test_num, QtCore.SIGNAL("currentIndexChanged(const QString&)"), self.load_channels)
@@ -131,21 +133,33 @@ class MyForm(QtGui.QMainWindow):
             self.ui.label_xmin.setEnabled(True)
             # self.ui.label_ymax.setEnabled(True)
             # self.ui.label_ymin.setEnabled(True)
+            self.ui.label_zmax.setEnabled(True)
+            self.ui.label_zmin.setEnabled(True)
 
             self.ui.doubleSpinBox_xmax.setEnabled(True)
             self.ui.doubleSpinBox_xmin.setEnabled(True)
             # self.ui.doubleSpinBox_ymax.setEnabled(True)
             # self.ui.doubleSpinBox_ymin.setEnabled(True)
+            self.ui.doubleSpinBox_zmax.setEnabled(True)
+            self.ui.doubleSpinBox_zmin.setEnabled(True)
+
+            self.ui.groupBox_contourLvls.setEnabled(True)
         else:
             self.ui.label_xmax.setEnabled(False)
             self.ui.label_xmin.setEnabled(False)
             # self.ui.label_ymax.setEnabled(False)
             # self.ui.label_ymin.setEnabled(False)
+            self.ui.label_zmax.setEnabled(False)
+            self.ui.label_zmin.setEnabled(False)
 
             self.ui.doubleSpinBox_xmax.setEnabled(False)
             self.ui.doubleSpinBox_xmin.setEnabled(False)
             # self.ui.doubleSpinBox_ymax.setEnabled(False)
             # self.ui.doubleSpinBox_ymin.setEnabled(False)
+            self.ui.doubleSpinBox_zmax.setEnabled(False)
+            self.ui.doubleSpinBox_zmin.setEnabled(False)
+
+            self.ui.groupBox_contourLvls.setEnabled(False)
 
     def load_traces(self):
         self.ui.comboBox_trace.clear()
@@ -477,7 +491,15 @@ class MyForm(QtGui.QMainWindow):
 
 
         plt.figure()
-        cp = plt.contourf(X, Y, Z)
+
+        if self.ui.groupBoxWindow.isChecked():
+            # Set the min, max and number of contour levels
+            levels = np.linspace(self.ui.doubleSpinBox_zmin.value(), self.ui.doubleSpinBox_zmax.value(), num=(self.ui.spinBoxContourLevels.value()+1))
+            cp = plt.contourf(X, Y, Z, levels)
+        else:
+            # Auto assign contour levels
+            cp = plt.contourf(X, Y, Z)
+
         plt.colorbar(cp, label='Mean Spikes Per Presentation')
 
         # print 'X:', X

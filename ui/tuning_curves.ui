@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>680</width>
-    <height>707</height>
+    <height>743</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -556,6 +556,106 @@
            </item>
           </layout>
          </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <item>
+            <widget class="QLabel" name="label_zmax">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>8</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Z Max</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_zmax">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>8</pointsize>
+              </font>
+             </property>
+             <property name="suffix">
+              <string> ms/p</string>
+             </property>
+             <property name="decimals">
+              <number>1</number>
+             </property>
+             <property name="minimum">
+              <double>0.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>100.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>10.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_zmin">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>8</pointsize>
+              </font>
+             </property>
+             <property name="suffix">
+              <string> ms/p</string>
+             </property>
+             <property name="decimals">
+              <number>1</number>
+             </property>
+             <property name="minimum">
+              <double>0.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>100.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>0.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_zmin">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>8</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Z Min</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
         </layout>
        </widget>
       </item>
@@ -580,12 +680,19 @@
       </item>
       <item row="0" column="2">
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="2" column="0">
+        <item row="1" column="1" rowspan="4">
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
          <widget class="QGroupBox" name="groupBoxThreshold">
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>100</height>
+            <height>50</height>
            </size>
           </property>
           <property name="font">
@@ -639,14 +746,7 @@
           </layout>
          </widget>
         </item>
-        <item row="0" column="1" rowspan="4">
-         <widget class="Line" name="line">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0" rowspan="2">
+        <item row="1" column="0" rowspan="2">
          <widget class="QGroupBox" name="groupBox_stimulus">
           <property name="font">
            <font>
@@ -691,7 +791,51 @@
           </layout>
          </widget>
         </item>
-        <item row="0" column="2" rowspan="3">
+        <item row="4" column="0">
+         <widget class="QGroupBox" name="groupBox_contourLvls">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="title">
+           <string>Contour </string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_5">
+           <item row="0" column="0">
+            <widget class="QSpinBox" name="spinBoxContourLevels">
+             <property name="font">
+              <font>
+               <pointsize>8</pointsize>
+              </font>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="suffix">
+              <string> Levels</string>
+             </property>
+             <property name="minimum">
+              <number>1</number>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+             <property name="value">
+              <number>10</number>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="2" rowspan="4">
          <widget class="QGroupBox" name="groupBox_log">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Ignored">
